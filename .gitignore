@@ -1,2 +1,7 @@
 __pycache__
 dataset
+.DS_STORE
+*.png
+*.jpg
+*.model
+*.h5
