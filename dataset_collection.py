@@ -29,13 +29,13 @@ def draw_capture_area(frame):
     cv2.putText(frame,str(COUNTER),(50,350),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,0,0))
     if CAPTURE==255:
         cv2.putText(frame,"Done",(50,380),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,0,0))    
-    cv2.rectangle(frame,(320,60),(600,400),(0,255,0),1)
+    cv2.rectangle(frame,(280,60),(600,400),(0,255,0),1)
 symbol = input("Enter Symbol: ")
 if not os.path.isdir(f"dataset/{symbol}"):
     os.mkdir(f"dataset/{symbol}")
 os.system(f"dataset/{symbol}/*")
 CAPTURE=0
-NUM_IMAGES = 256
+NUM_IMAGES = 2048
 COUNTER = 0
 while True:
     if cv2.waitKey(1) == ord('q'):
@@ -46,7 +46,7 @@ while True:
     frame = cv2.flip(frame,1)
     draw_capture_area(frame)
     cv2.imshow("Frame",frame)
-    cropped = frame[60:400,320:600]
+    cropped = frame[60:400,280:600]
     cropped = mystery_function(cropped)
     cv2.imshow("Capture Area",cropped)
     if CAPTURE:
@@ -54,7 +54,6 @@ while True:
             print("Counter: ",COUNTER)
             cv2.imwrite(f"dataset/{symbol}/"+str(COUNTER)+".jpg",cropped)
             COUNTER+=1
-            time.sleep(0.2)
         else:
             CAPTURE=0
             cv2.putText(frame,"Done",(20,350),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,0,0))

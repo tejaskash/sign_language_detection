@@ -14,10 +14,10 @@ import random
 from cv2 import cv2
 import os
 
-EPOCHS = 200
+EPOCHS = 100
 INIT_LR = 1e-3
 BS = 32
-NUM_CLASSES = 2
+NUM_CLASSES = 4
 data = []
 labels = []
 
@@ -37,9 +37,9 @@ for imagePath in imagePaths:
         labels[label] = count
         count+=1
     labs.append(labels[label])
+print(labels)
 data = np.array(data,dtype="float") / 255.0
 labels = np.array(labs)
-
 (trainX,testX,trainY,testY) = train_test_split(data,labels,test_size=0.25,random_state=42)
 
 trainY = to_categorical(trainY,num_classes=NUM_CLASSES)
